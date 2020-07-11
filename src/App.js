@@ -82,8 +82,7 @@ class App extends Component {
     this.setState({currentPair: newPair, guesses: newGuesses});
     console.log('first index',  cards[newPair[0]], 'second one', cards[newPair[1]])
     if(matched) {
-      this.setState({matchedCardIndices: [...matchedCardIndices, ...newPair]});
-      console.log('matched')
+      this.setState({matchedCardIndices: [...matchedCardIndices, ...newPair]})
     }
 
     setTimeout(() => this.setState({currentPair: []}), VISUAL_PAUSE_MSECS);
