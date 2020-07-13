@@ -5,7 +5,8 @@ import './App.css'
 
 import Card from './Card'
 import GuessCount from './GuessCount'
-import HallOfFame, {FAKE_HOF} from './HallOfFame'
+import HallOfFame from './HallOfFame'
+import HighScoreInput from './HighScoreInput'
 
 const SIDE = 6
 const SYMBOLS = '😀🎉💖🎩🐶🐱🦄🐬🌍🌛🌞💫🍎🍌🍓🍐🍟🍿'
@@ -28,6 +29,7 @@ class App extends Component {
       cards: this.generateCards(),
       currentPair: [],
       guesses: 0,
+      hallOfFame: null,
       matchedCardIndices: []
     }
   }
@@ -80,17 +82,20 @@ class App extends Component {
     const newGuesses = guesses + 1;
     const matched = newPair[0] !== index && cards[newPair[0]] === cards[newPair[1]];
     this.setState({currentPair: newPair, guesses: newGuesses});
-    console.log('first index',  cards[newPair[0]], 'second one', cards[newPair[1]])
     if(matched) {
       this.setState({matchedCardIndices: [...matchedCardIndices, ...newPair]})
     }
 
-    setTimeout(() => this.setState({currentPair: []}), VISUAL_PAUSE_MSECS);
+    setTimeout(() => this.setState({currentPair: []}), VISUAL_PAUSE_MSECS)
+  }
 
+  // Arrow fx for binding
+  displayHallOfFame = (hallOfFame) => {
+    this.setState({ hallOfFame })
   }
 
   render() {
-    const { cards, guesses, matchedCardIndices } = this.state;
+    const { cards, guesses, hallOfFame, matchedCardIndices } = this.state;
     const won = matchedCardIndices.length === cards.length;
     return (
       <div className="memory">
@@ -105,7 +110,14 @@ class App extends Component {
             //onClick={card => this.handleCardClick(card)} /> // on donne l'impression à Card qu'il reçoit une propriété différente à chaque fois et qu'il a besoin de se re-renderer
           />
         ))}
-        {won && <HallOfFame entries={FAKE_HOF} />}
+        
+        {won && 
+          (hallOfFame ? (
+            <HallOfFame entries={hallOfFame} />
+          ) : (
+            <HighScoreInput guesses={guesses} onStored={this.displayHallOfFame} />
+          ))
+        }
       </div>
     )
   }
