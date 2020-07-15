@@ -19,9 +19,14 @@ describe('<App />', () => {
         expect(wrapper.find('Card')).to.have.length(36)
     })
 
-    it('GuessCount has props guesses equal to 0', () => {
+    it('GuessCount has prop guesses equal to 0', () => {
         const wrapper = shallow(<App />)
         expect(wrapper.find('GuessCount').props().guesses).to.equal(0)
+    })
+
+    it('GuessCount has prop guesses', () => {
+        const wrapper = shallow(<App />)
+        expect(wrapper.find('GuessCount').prop('guesses')).to.exist()
     })
     /* 
     // I have to install chai-react-element to make this assertion work
