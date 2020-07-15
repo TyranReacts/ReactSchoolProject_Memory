@@ -10,8 +10,8 @@ describe('<App />', () => {
     it('renders without crashing', () => {
         const wrapper = shallow(<App />)
 
-        //expect(wrapper).to.contain(<GuessCount guesses={0} />) // Difference: Comparing two different types of values. Expected undefined but received object.
-        expect(wrapper.contains(<GuessCount guesses={0} />)).to.equal(true)
+        expect(wrapper).to.contain(<GuessCount guesses={0} />) // wouldn't work without chai-enzyme plugin 
+        //expect(wrapper.contains(<GuessCount guesses={0} />)).to.equal(true) 
     })
 
     it('contains 36 cards', () => {
