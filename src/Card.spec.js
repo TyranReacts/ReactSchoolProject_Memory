@@ -23,6 +23,6 @@ describe('<Card />', () => {
             <Card card="💖" feedback="hidden" index={0} onClick={onClick} />
         )
         
-        expect(toJson(wrapper, {noKey: false, mode: 'deep'})).to.matchSnapshot() // I had use the helper so that the snapshot renders same way as a detailed json object (2nd argument is optional)
+        expect(toJson(wrapper, {noKey: false, mode: 'deep'})).to.matchSnapshot() // I had use the helper toJson (in which 2nd argument is optional)
     })
 })

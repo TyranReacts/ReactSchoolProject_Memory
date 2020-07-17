@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
-import toJson from 'enzyme-to-json'
+// import toJson from 'enzyme-to-json'
 import sinon from 'sinon'
 
 import App, { SYMBOLS }  from './App'
@@ -17,12 +17,12 @@ describe('<App />', () => {
         const mock = sinon
             .stub(App.prototype, 'generateCards')
             .returns([...SYMBOLS.repeat(2)])
-
+        
         try {
             const wrapper = shallow(<App />)
-            expect(toJson(wrapper)).to.matchSnapshot()
+            expect(wrapper).to.matchSnapshot() // even without the helper toJson I get the same result
         } finally {
-            mock.restore()
+            mock.restore() 
         }
-    })  
+    })
 })
