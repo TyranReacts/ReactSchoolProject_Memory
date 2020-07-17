@@ -15,8 +15,8 @@ describe('<App />', () => {
 
     it('should match its reference snapshot', () => {
         const mock = sinon
-            .stub(App.prototype, 'generateCards')
-            .returns([...SYMBOLS.repeat(2)])
+            .stub(App.prototype, 'generateCards') // replacing generateCards'implementation 
+            .returns([...SYMBOLS.repeat(2)]) // so that it returns the same table with no random cards
         
         try {
             const wrapper = shallow(<App />)
